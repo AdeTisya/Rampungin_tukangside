@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'screens/Widgets/welcome.dart';
 import 'screens/Login/login.dart';
-import 'screens/content/home_screen.dart';
-import 'screens/content/payment_screen.dart';
-import 'screens/content/chat_screen.dart';
+import 'screens/content_bottom/home_screen.dart';
+import 'screens/content_bottom/payment_screen.dart';
+import 'screens/content_bottom/chat_screen.dart';
 import 'screens/form/form_tukang.dart';
 import 'screens/Widgets/bottom_navigation.dart';
 import 'screens/main_container.dart';
+import 'screens/detail/detail_order.dart';
+import 'screens/detail/profile.dart';
+import 'screens/detail/notification.dart';
 
 
 void main() {
@@ -30,6 +33,9 @@ class MyApp extends StatelessWidget {
         '/PaymentScreen': (context) => const PaymentScreen(),
         '/bottom_navigation': (context) => const BottomNavigation(),
         '/main_container': (context) => const MainContainer(),
+        '/detail_order': (context) => const DetailOrder(),
+        '/profile': (context) => const Profile(),
+        '/notification': (context) => const NotificationScreen(),
       },
     );
   }

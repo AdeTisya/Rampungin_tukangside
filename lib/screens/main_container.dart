@@ -1,7 +1,7 @@
 // File: lib/screens/main_container.dart
 import 'package:flutter/material.dart';
 import 'Widgets/bottom_navigation.dart';
-import 'content/home_screen.dart';
+import 'content_bottom/home_screen.dart';
 
 class MainContainer extends StatefulWidget {
   const MainContainer({super.key});

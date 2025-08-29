@@ -10,7 +10,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> 
     with TickerProviderStateMixin {
   
-  int _currentIndex = 0; // Chat is index 0
+  int _currentIndex = 0; 
   late AnimationController _fadeController;
   late AnimationController _slideController;
   late Animation<double> _fadeAnimation;
@@ -121,7 +121,7 @@ class _ChatScreenState extends State<ChatScreen>
               ),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF000000).withOpacity(0.15),
+                  color: const Color(0xFF000000).withOpacity( 0.15),
                   offset: const Offset(0, -4),
                   blurRadius: 16,
                 ),
@@ -260,18 +260,18 @@ class _ChatScreenState extends State<ChatScreen>
                 ],
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Icon(
-                Icons.more_vert,
-                color: Colors.white,
-                size: 24,
-              ),
-            ),
+            // Container(
+            //   padding: const EdgeInsets.all(8),
+            //   decoration: BoxDecoration(
+            //     color: Colors.white.withOpacity(0.2),
+            //     borderRadius: BorderRadius.circular(12),
+            //   ),
+            //   child: const Icon(
+            //     Icons.more_vert,
+            //     color: Colors.white,
+            //     size: 24,
+            //   ),
+            // ),
           ],
         ),
       ),

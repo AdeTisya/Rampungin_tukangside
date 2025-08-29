@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../detail/detail_order.dart';
+import '../detail/profile.dart'; 
+import '../detail/notification.dart';
+import '../Login/login.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,8 +21,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Animation<Offset> _slideAnimation;
   late Animation<double> _pulseAnimation;
 
-  bool _statusTukangActive = true;
-
   void _handleNavigation(int index) {
     switch (index) {
       case 0:
@@ -31,6 +33,88 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         Navigator.of(context).pushReplacementNamed('/PaymentScreen');
         break;
     }
+  }
+
+  void _showLogoutDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: Row(
+            children: [
+              Icon(
+                Icons.logout,
+                color: Colors.red[600],
+                size: 24,
+              ),
+              const SizedBox(width: 8),
+              const Text(
+                'Keluar',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          content: const Text(
+            'Apakah Anda yakin ingin keluar dari aplikasi?',
+            style: TextStyle(fontSize: 16),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close dialog
+              },
+              child: Text(
+                'Batal',
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFFFF6B6B), Color(0xFFE55353)],
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close dialog
+                  _logout();
+                },
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                ),
+                child: const Text(
+                  'Keluar',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _logout() {
+    // Navigate back to LoginScreen and clear all previous routes
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   @override
@@ -96,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _fadeController.dispose();
     _slideController.dispose();
     _pulseController.dispose();
-    super.dispose(    );
+    super.dispose();
   }
 
   Widget _buildNavItem(int index, IconData icon, IconData activeIcon, String label, {bool isCenter = false}) {
@@ -197,7 +281,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         child: InkWell(
           borderRadius: BorderRadius.circular(25),
           onTap: () {
-            // Handle job order tap
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DetailOrder(),
+              ),
+            );
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -290,7 +379,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Enhanced Header Section
+                    // Enhanced Header Section with Logout Button
                     FadeTransition(
                       opacity: _fadeAnimation,
                       child: Container(
@@ -328,50 +417,108 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               children: [
                                 const SizedBox(height: 20),
                                 
-                                // Enhanced top bar
+                                // Enhanced top bar with logout button
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    AnimatedBuilder(
-                                      animation: _pulseAnimation,
-                                      builder: (context, child) {
-                                        return Transform.scale(
-                                          scale: _pulseAnimation.value * 0.1 + 0.95,
-                                          child: Container(
-                                            padding: const EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                              color: Colors.white.withOpacity(0.2),
-                                              borderRadius: BorderRadius.circular(12),
-                                            ),
-                                            child: const Icon(
-                                              Icons.notifications,
-                                              size: 28,
+                                    // Logout Button
+                                    GestureDetector(
+                                      onTap: _showLogoutDialog,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.2),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        child: const Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(
+                                              Icons.logout,
+                                              size: 20,
                                               color: Colors.white,
                                             ),
-                                          ),
-                                        );
-                                      },
+                                            SizedBox(width: 4),
+                                            Text(
+                                              'Keluar',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                    const SizedBox(width: 12),
-                                    Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(20),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withOpacity(0.2),
-                                            blurRadius: 8,
-                                            spreadRadius: 2,
+                                    
+                                    // Right side buttons
+                                    Row(
+                                      children: [
+                                        // Fixed notification button
+                                        AnimatedBuilder(
+                                          animation: _pulseAnimation,
+                                          builder: (context, child) {
+                                            return Transform.scale(
+                                              scale: _pulseAnimation.value * 0.1 + 0.95,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) => const NotificationScreen(),
+                                                    ),
+                                                  );
+                                                },
+                                                child: Container(
+                                                  padding: const EdgeInsets.all(8),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white.withOpacity(0.2),
+                                                    borderRadius: BorderRadius.circular(12),
+                                                  ),
+                                                  child: const Icon(
+                                                    Icons.notifications,
+                                                    size: 28,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        const SizedBox(width: 12),
+                                        GestureDetector(
+                                          onTap: () {
+                                            // Navigate to Profile screen
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => const Profile(),
+                                              ),
+                                            );
+                                          },
+                                          child: Container(
+                                            width: 40,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(20),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black.withOpacity(0.2),
+                                                  blurRadius: 8,
+                                                  spreadRadius: 2,
+                                                ),
+                                              ],
+                                            ),
+                                            child: const Icon(
+                                              Icons.person,
+                                              color: Color(0xFFF3B950),
+                                              size: 24,
+                                            ),
                                           ),
-                                        ],
-                                      ),
-                                      child: const Icon(
-                                        Icons.person,
-                                        color: Color(0xFFF3B950),
-                                        size: 24,
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -573,143 +720,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ),
 
-                    const SizedBox(height: 20),
-
-                    // Enhanced Status Tukang Card
-                    _buildStaticCard(
-                      delay: 0.4,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Colors.white,
-                              Colors.white.withOpacity(0.95),
-                            ],
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              offset: const Offset(0, 8),
-                              blurRadius: 20,
-                              spreadRadius: 2,
-                            ),
-                          ],
-                        ),
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(20),
-                            onTap: () {
-                              setState(() {
-                                _statusTukangActive = !_statusTukangActive;
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Row(
-                                children: [
-                                  AnimatedContainer(
-                                    duration: const Duration(milliseconds: 300),
-                                    width: 50,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        colors: _statusTukangActive 
-                                          ? [const Color(0xFF4CAF50), const Color(0xFF45A049)]
-                                          : [const Color(0xFFF44336), const Color(0xFFE53935)],
-                                      ),
-                                      borderRadius: BorderRadius.circular(25),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: (_statusTukangActive 
-                                              ? const Color(0xFF4CAF50) 
-                                              : const Color(0xFFF44336))
-                                              .withOpacity(0.3),
-                                          blurRadius: 10,
-                                          spreadRadius: 2,
-                                        ),
-                                      ],
-                                    ),
-                                    child: Icon(
-                                      _statusTukangActive 
-                                        ? Icons.power_settings_new
-                                        : Icons.power_off,
-                                      color: Colors.white,
-                                      size: 28,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'STATUS TUKANG',
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 8),
-                                            Container(
-                                              padding: const EdgeInsets.symmetric(
-                                                horizontal: 8, vertical: 2),
-                                              decoration: BoxDecoration(
-                                                color: _statusTukangActive 
-                                                  ? Colors.green.withOpacity(0.1)
-                                                  : Colors.red.withOpacity(0.1),
-                                                borderRadius: BorderRadius.circular(8),
-                                                border: Border.all(
-                                                  color: _statusTukangActive 
-                                                    ? Colors.green
-                                                    : Colors.red,
-                                                  width: 1,
-                                                ),
-                                              ),
-                                              child: Text(
-                                                _statusTukangActive ? 'AKTIF' : 'NONAKTIF',
-                                                style: TextStyle(
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: _statusTukangActive 
-                                                    ? Colors.green
-                                                    : Colors.red,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 4),
-                                        const Text(
-                                          'atur ketersediaan tukang apakah sedang siap menerima pekerjaan atau tidak.',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 44),
 
                     // Enhanced Order Masuk Section
                     _buildStaticCard(
-                      delay: 0.6,
+                      delay: 0.4,
                       child: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 20),
                         child: Column(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rampungin_id/screens/form/form_tukang.dart'; 
+import 'package:rampungin_id/screens/content_bottom/home_screen.dart';
 import 'package:rampungin_id/screens/Login/google_signin_service.dart'; 
 
 class LoginScreen extends StatefulWidget {
@@ -171,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => const FormTukang(),
+          pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },

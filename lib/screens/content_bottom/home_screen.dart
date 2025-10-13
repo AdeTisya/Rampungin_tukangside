@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../detail/detail_order.dart';
-import '../detail/profile.dart'; 
+import '../detail/profile.dart';
 import '../detail/notification.dart';
 import '../Login/login.dart';
+// import '../form/form_tukang.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _slideController;
   late AnimationController _pulseController;
-  
+
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
   late Animation<double> _pulseAnimation;
@@ -45,18 +46,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           title: Row(
             children: [
-              Icon(
-                Icons.logout,
-                color: Colors.red[600],
-                size: 24,
-              ),
+              Icon(Icons.logout, color: Colors.red[600], size: 24),
               const SizedBox(width: 8),
               const Text(
                 'Keluar',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -91,7 +85,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   _logout();
                 },
                 style: TextButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                 ),
                 child: const Text(
                   'Keluar',
@@ -129,12 +126,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 1200),
       vsync: this,
     );
-    
+
     _slideController = AnimationController(
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
-    
+
     _pulseController = AnimationController(
       duration: const Duration(milliseconds: 2000),
       vsync: this,
@@ -143,34 +140,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeOut,
-    ));
+    ).animate(CurvedAnimation(parent: _fadeController, curve: Curves.easeOut));
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.3),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _slideController,
-      curve: Curves.easeOutCubic,
-    ));
+    ).animate(
+      CurvedAnimation(parent: _slideController, curve: Curves.easeOutCubic),
+    );
 
-    _pulseAnimation = Tween<double>(
-      begin: 0.95,
-      end: 1.05,
-    ).animate(CurvedAnimation(
-      parent: _pulseController,
-      curve: Curves.easeInOut,
-    ));
+    _pulseAnimation = Tween<double>(begin: 0.95, end: 1.05).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
   }
 
   void _startAnimations() async {
     _pulseController.repeat(reverse: true);
-    
+
     await Future.delayed(const Duration(milliseconds: 300));
     _fadeController.forward();
-    
+
     await Future.delayed(const Duration(milliseconds: 200));
     _slideController.forward();
   }
@@ -183,32 +172,39 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  Widget _buildNavItem(int index, IconData icon, IconData activeIcon, String label, {bool isCenter = false}) {
+  Widget _buildNavItem(
+    int index,
+    IconData icon,
+    IconData activeIcon,
+    String label, {
+    bool isCenter = false,
+  }) {
     bool isSelected = _currentIndex == index;
-    
+
     return Expanded(
       child: GestureDetector(
         onTap: () => _handleNavigation(index),
         child: Container(
           height: 60,
           margin: const EdgeInsets.symmetric(horizontal: 8),
-          decoration: isCenter && isSelected
-              ? BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                )
-              : isSelected && !isCenter
+          decoration:
+              isCenter && isSelected
                   ? BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(20),
-                    )
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.15),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  )
+                  : isSelected && !isCenter
+                  ? BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(20),
+                  )
                   : null,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -216,9 +212,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               Icon(
                 isSelected ? activeIcon : icon,
                 size: isCenter ? 28 : 24,
-                color: isCenter && isSelected
-                    ? const Color(0xFFF3B950)
-                    : isSelected
+                color:
+                    isCenter && isSelected
+                        ? const Color(0xFFF3B950)
+                        : isSelected
                         ? Colors.white
                         : Colors.white.withOpacity(0.7),
               ),
@@ -228,9 +225,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                  color: isCenter && isSelected
-                      ? const Color(0xFFF3B950)
-                      : isSelected
+                  color:
+                      isCenter && isSelected
+                          ? const Color(0xFFF3B950)
+                          : isSelected
                           ? Colors.white
                           : Colors.white.withOpacity(0.7),
                 ),
@@ -242,16 +240,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildStaticCard({
-    required Widget child,
-    required double delay,
-  }) {
+  Widget _buildStaticCard({required Widget child, required double delay}) {
     return SlideTransition(
       position: _slideAnimation,
-      child: FadeTransition(
-        opacity: _fadeAnimation,
-        child: child,
-      ),
+      child: FadeTransition(opacity: _fadeAnimation, child: child),
     );
   }
 
@@ -283,9 +275,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => const DetailOrder(),
-              ),
+              MaterialPageRoute(builder: (context) => const DetailOrder()),
             );
           },
           child: Padding(
@@ -308,7 +298,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ],
                   ),
-                  child: const Icon(Icons.person, color: Colors.white, size: 20),
+                  child: const Icon(
+                    Icons.person,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                 ),
                 const SizedBox(width: 16),
                 const Expanded(
@@ -325,22 +319,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                       Text(
                         'Pekerjaan baru tersedia',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.grey,
-                        ),
+                        style: TextStyle(fontSize: 11, color: Colors.grey),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.orange.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Colors.orange.withOpacity(0.3),
-                    ),
+                    border: Border.all(color: Colors.orange.withOpacity(0.3)),
                   ),
                   child: const Text(
                     'Request Order',
@@ -358,6 +350,125 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   color: Color(0xFF8B4513),
                 ),
               ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Widget untuk kotak verifikasi tukang
+  Widget _buildVerificationCard() {
+    return _buildStaticCard(
+      delay: 0.3,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFF4CAF50), Color(0xFF45A049)],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              offset: const Offset(0, 8),
+              blurRadius: 20,
+              spreadRadius: 2,
+            ),
+            BoxShadow(
+              color: const Color(0xFF4CAF50).withOpacity(0.2),
+              offset: const Offset(0, 4),
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(20),
+            onTap: () {
+              Navigator.pushNamed(context, '/formtukang');
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.3),
+                        width: 2,
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.verified_user,
+                      color: Colors.white,
+                      size: 28,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Verifikasi Tukang',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Lengkapi verifikasi untuk meningkatkan kepercayaan pelanggan',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white70,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.white.withOpacity(0.3)),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Verifikasi',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(width: 4),
+                        Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -388,10 +499,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           gradient: const LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
-                            colors: [
-                              Color(0xFFF3B950),
-                              Color(0xFFE8A63C),
-                            ],
+                            colors: [Color(0xFFF3B950), Color(0xFFE8A63C)],
                           ),
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(100),
@@ -416,10 +524,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             child: Column(
                               children: [
                                 const SizedBox(height: 20),
-                                
+
                                 // Enhanced top bar with logout button
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     // Logout Button
                                     GestureDetector(
@@ -428,7 +537,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         padding: const EdgeInsets.all(8),
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(12),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
                                         ),
                                         child: const Row(
                                           mainAxisSize: MainAxisSize.min,
@@ -451,7 +562,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         ),
                                       ),
                                     ),
-                                    
+
                                     // Right side buttons
                                     Row(
                                       children: [
@@ -460,21 +571,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                           animation: _pulseAnimation,
                                           builder: (context, child) {
                                             return Transform.scale(
-                                              scale: _pulseAnimation.value * 0.1 + 0.95,
+                                              scale:
+                                                  _pulseAnimation.value * 0.1 +
+                                                  0.95,
                                               child: GestureDetector(
                                                 onTap: () {
                                                   Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                      builder: (context) => const NotificationScreen(),
+                                                      builder:
+                                                          (context) =>
+                                                              const NotificationScreen(),
                                                     ),
                                                   );
                                                 },
                                                 child: Container(
-                                                  padding: const EdgeInsets.all(8),
+                                                  padding: const EdgeInsets.all(
+                                                    8,
+                                                  ),
                                                   decoration: BoxDecoration(
-                                                    color: Colors.white.withOpacity(0.2),
-                                                    borderRadius: BorderRadius.circular(12),
+                                                    color: Colors.white
+                                                        .withOpacity(0.2),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          12,
+                                                        ),
                                                   ),
                                                   child: const Icon(
                                                     Icons.notifications,
@@ -493,7 +614,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                builder: (context) => const Profile(),
+                                                builder:
+                                                    (context) =>
+                                                        const Profile(),
                                               ),
                                             );
                                           },
@@ -502,10 +625,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             height: 40,
                                             decoration: BoxDecoration(
                                               color: Colors.white,
-                                              borderRadius: BorderRadius.circular(20),
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: Colors.black.withOpacity(0.2),
+                                                  color: Colors.black
+                                                      .withOpacity(0.2),
                                                   blurRadius: 8,
                                                   spreadRadius: 2,
                                                 ),
@@ -530,12 +655,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     ShaderMask(
-                                      shaderCallback: (bounds) => LinearGradient(
-                                        colors: [
-                                          Colors.white,
-                                          Colors.white.withOpacity(0.9),
-                                        ],
-                                      ).createShader(bounds),
+                                      shaderCallback:
+                                          (bounds) => LinearGradient(
+                                            colors: [
+                                              Colors.white,
+                                              Colors.white.withOpacity(0.9),
+                                            ],
+                                          ).createShader(bounds),
                                       child: const Text(
                                         'Selamat datang di Rampungin.id',
                                         style: TextStyle(
@@ -555,7 +681,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     ),
                                     const SizedBox(height: 8),
                                     Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 6,
+                                      ),
                                       decoration: BoxDecoration(
                                         color: Colors.white.withOpacity(0.2),
                                         borderRadius: BorderRadius.circular(15),
@@ -579,6 +708,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
+
+                    const SizedBox(height: 24),
+
+                    // Kotak Verifikasi Tukang - TAMBAHAN BARU
+                    _buildVerificationCard(),
 
                     const SizedBox(height: 24),
 
@@ -619,12 +753,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               height: 50,
                               decoration: BoxDecoration(
                                 gradient: const LinearGradient(
-                                  colors: [Color(0xFFF3B950), Color(0xFFE8A63C)],
+                                  colors: [
+                                    Color(0xFFF3B950),
+                                    Color(0xFFE8A63C),
+                                  ],
                                 ),
                                 borderRadius: BorderRadius.circular(25),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color(0xFFF3B950).withOpacity(0.3),
+                                    color: const Color(
+                                      0xFFF3B950,
+                                    ).withOpacity(0.3),
                                     blurRadius: 10,
                                     spreadRadius: 2,
                                   ),
@@ -688,9 +827,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   child: Container(
                                     width: 100,
                                     height: 40,
-                                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                    ),
                                     child: const Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Icon(
                                           Icons.monetization_on,
@@ -755,7 +897,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   Container(
                                     padding: const EdgeInsets.all(8),
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFF8B4513).withOpacity(0.1),
+                                      color: const Color(
+                                        0xFF8B4513,
+                                      ).withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: const Icon(
@@ -818,7 +962,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
             ),
           ),
-          
+
           // Sticky Bottom Navigation
           Container(
             height: 80,
@@ -826,10 +970,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFFE6B366),
-                  Color(0xFFF3B950),
-                ],
+                colors: [Color(0xFFE6B366), Color(0xFFF3B950)],
               ),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(25),
@@ -848,9 +989,25 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildNavItem(0, Icons.chat_bubble_outline, Icons.chat_bubble, 'Chat'),
-                  _buildNavItem(1, Icons.home_outlined, Icons.home, 'Home', isCenter: true),
-                  _buildNavItem(2, Icons.account_balance_wallet_outlined, Icons.account_balance_wallet, 'Payment'),
+                  _buildNavItem(
+                    0,
+                    Icons.chat_bubble_outline,
+                    Icons.chat_bubble,
+                    'Chat',
+                  ),
+                  _buildNavItem(
+                    1,
+                    Icons.home_outlined,
+                    Icons.home,
+                    'Home',
+                    isCenter: true,
+                  ),
+                  _buildNavItem(
+                    2,
+                    Icons.account_balance_wallet_outlined,
+                    Icons.account_balance_wallet,
+                    'Payment',
+                  ),
                 ],
               ),
             ),

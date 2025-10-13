@@ -404,7 +404,7 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                                       borderRadius: BorderRadius.circular(50),
                                     ),
                                     elevation: 8,
-                                    shadowColor: const Color(0xFFF4B951).withOpacity(0.5),
+                                    shadowColor: const Color(0xFFF4B951).withValues(alpha: 0.5),
                                   ).copyWith(
                                     overlayColor: MaterialStateProperty.all(
                                       Colors.white.withOpacity(0.1),

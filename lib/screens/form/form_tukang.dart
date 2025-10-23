@@ -91,6 +91,7 @@ class _FormTukangState extends State<FormTukang> with TickerProviderStateMixin {
       _showSnackBar('Data berhasil disubmit!', Colors.green);
 
       Future.delayed(const Duration(seconds: 1), () {
+        if (!mounted) return;
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
@@ -158,7 +159,7 @@ class _FormTukangState extends State<FormTukang> with TickerProviderStateMixin {
 
         // Di sini Anda bisa menggunakan image.path untuk mengupload ke server
         // atau menyimpan path-nya untuk keperluan lain
-        print('Foto KTP path: ${image.path}');
+        debugPrint('Foto KTP path: ${image.path}');
       }
     } catch (e) {
       _showSnackBar('Gagal mengambil foto: $e', Colors.red);
@@ -175,10 +176,15 @@ class _FormTukangState extends State<FormTukang> with TickerProviderStateMixin {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: Color(0xFFF3B950),
-              onPrimary: Colors.black,
+              primary: Color(0xFFF3B950), // warna header date picker
+              onPrimary: Colors.black, // warna teks di atas warna utama
+              onSurface: Colors.black, // warna teks tanggal
             ),
-            dialogBackgroundColor: Colors.white,
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.black, 
+              ),
+            ),
           ),
           child: child!,
         );
@@ -308,13 +314,13 @@ class _FormTukangState extends State<FormTukang> with TickerProviderStateMixin {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   offset: const Offset(0, 2),
                   blurRadius: 4,
                 ),
               ],
               border: Border.all(
-                color: const Color(0xFFF3B950).withOpacity(0.3),
+                color: const Color(0xFFF3B950).withValues(alpha: 0.3),
                 width: 1,
               ),
             ),
@@ -390,23 +396,28 @@ class _FormTukangState extends State<FormTukang> with TickerProviderStateMixin {
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   offset: const Offset(0, 2),
                   blurRadius: 4,
                 ),
               ],
               border: Border.all(
-                color: const Color(0xFFF3B950).withOpacity(0.3),
+                color: const Color(0xFFF3B950).withValues(alpha: 0.3),
                 width: 1,
               ),
             ),
             child: DropdownButtonFormField<String>(
-              value: value?.isEmpty == true ? null : value,
-              validator: validator,
+              initialValue: _selectedCategory.isEmpty ? null : _selectedCategory, // fix null value
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Pilih kategori';
+                }
+                return null;
+              },
               hint: Text(
                 hintText,
                 style: const TextStyle(
-                  fontFamily: 'Abel',
+                  fontFamily: 'Abel', 
                   fontSize: 12,
                   color: Color(0xFF999999),
                 ),
@@ -482,7 +493,9 @@ class _FormTukangState extends State<FormTukang> with TickerProviderStateMixin {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFFF3B950).withOpacity(0.4),
+                                color: const Color(
+                                  0xFFF3B950,
+                                ).withValues(alpha: 0.4),
                                 offset: const Offset(0, 4),
                                 blurRadius: 12,
                               ),
@@ -501,7 +514,9 @@ class _FormTukangState extends State<FormTukang> with TickerProviderStateMixin {
                                     icon: Container(
                                       padding: const EdgeInsets.all(8),
                                       decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.2),
+                                        color: Colors.white.withValues(
+                                          alpha: 0.2,
+                                        ),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: const Icon(
@@ -575,11 +590,13 @@ class _FormTukangState extends State<FormTukang> with TickerProviderStateMixin {
                                     border: Border.all(
                                       color: const Color(
                                         0xFFF3B950,
-                                      ).withOpacity(0.3),
+                                      ).withValues(alpha: 0.3),
                                     ),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black.withOpacity(0.05),
+                                        color: Colors.black.withValues(
+                                          alpha: 0.05,
+                                        ),
                                         offset: const Offset(0, 2),
                                         blurRadius: 4,
                                       ),
@@ -780,8 +797,8 @@ class _FormTukangState extends State<FormTukang> with TickerProviderStateMixin {
                                           decoration: BoxDecoration(
                                             color:
                                                 _ktpImageSelected
-                                                    ? Colors.green.withOpacity(
-                                                      0.05,
+                                                    ? Colors.green.withValues(
+                                                      alpha: 0.05,
                                                     )
                                                     : Colors.white,
                                             borderRadius: BorderRadius.circular(
@@ -793,13 +810,13 @@ class _FormTukangState extends State<FormTukang> with TickerProviderStateMixin {
                                                       ? Colors.green
                                                       : const Color(
                                                         0xFFF3B950,
-                                                      ).withOpacity(0.5),
+                                                      ).withValues(alpha: 0.5),
                                               width: 2,
                                             ),
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Colors.black.withOpacity(
-                                                  0.1,
+                                                color: Colors.black.withValues(
+                                                  alpha: 0.1,
                                                 ),
                                                 offset: const Offset(0, 2),
                                                 blurRadius: 4,
@@ -901,7 +918,7 @@ class _FormTukangState extends State<FormTukang> with TickerProviderStateMixin {
                                             ),
                                             elevation: 4,
                                             shadowColor: Colors.orange
-                                                .withOpacity(0.3),
+                                                .withValues(alpha: 0.3),
                                           ),
                                           child: const Row(
                                             mainAxisAlignment:

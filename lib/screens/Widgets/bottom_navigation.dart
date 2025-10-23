@@ -53,7 +53,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF000000).withOpacity(0.15),
+            color: const Color(0xFF000000).withValues(alpha:0.15),
             offset: const Offset(0, -4),
             blurRadius: 16,
           ),
@@ -88,7 +88,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
+                      color: Colors.black.withValues(alpha:0.15),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -96,7 +96,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 )
               : isSelected && !isCenter
                   ? BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha:0.2),
                       borderRadius: BorderRadius.circular(20),
                     )
                   : null,
@@ -110,7 +110,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     ? const Color(0xFFF3B950)
                     : isSelected
                         ? Colors.white
-                        : Colors.white.withOpacity(0.7),
+                        : Colors.white.withValues(alpha:0.7),
               ),
               const SizedBox(height: 2),
               Text(
@@ -122,7 +122,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                       ? const Color(0xFFF3B950)
                       : isSelected
                           ? Colors.white
-                          : Colors.white.withOpacity(0.7),
+                          : Colors.white.withValues(alpha:0.7),
                 ),
               ),
             ],

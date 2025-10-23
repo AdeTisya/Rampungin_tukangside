@@ -10,7 +10,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> 
     with TickerProviderStateMixin {
   
-  int _currentIndex = 0; 
+  final int _currentIndex = 0; 
   late AnimationController _fadeController;
   late AnimationController _slideController;
   late Animation<double> _fadeAnimation;
@@ -121,7 +121,7 @@ class _ChatScreenState extends State<ChatScreen>
               ),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF000000).withOpacity( 0.15),
+                  color: const Color(0xFF000000).withValues( alpha:0.15),
                   offset: const Offset(0, -4),
                   blurRadius: 16,
                 ),
@@ -159,7 +159,7 @@ class _ChatScreenState extends State<ChatScreen>
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
+                      color: Colors.black.withValues( alpha:0.15),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -167,7 +167,7 @@ class _ChatScreenState extends State<ChatScreen>
                 )
               : isSelected && !isCenter
                   ? BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues( alpha:0.2),
                       borderRadius: BorderRadius.circular(20),
                     )
                   : null,
@@ -181,7 +181,7 @@ class _ChatScreenState extends State<ChatScreen>
                     ? const Color(0xFFF3B950)
                     : isSelected
                         ? Colors.white
-                        : Colors.white.withOpacity(0.7),
+                        : Colors.white.withValues( alpha:0.7),
               ),
               const SizedBox(height: 2),
               Text(
@@ -193,7 +193,7 @@ class _ChatScreenState extends State<ChatScreen>
                       ? const Color(0xFFF3B950)
                       : isSelected
                           ? Colors.white
-                          : Colors.white.withOpacity(0.7),
+                          : Colors.white.withValues( alpha:0.7),
                 ),
               ),
             ],
@@ -227,7 +227,7 @@ class _ChatScreenState extends State<ChatScreen>
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues( alpha:0.2),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: const Icon(
@@ -263,7 +263,7 @@ class _ChatScreenState extends State<ChatScreen>
             // Container(
             //   padding: const EdgeInsets.all(8),
             //   decoration: BoxDecoration(
-            //     color: Colors.white.withOpacity(0.2),
+            //     color: Colors.white.withValues( alpha:0.2),
             //     borderRadius: BorderRadius.circular(12),
             //   ),
             //   child: const Icon(
@@ -288,7 +288,7 @@ class _ChatScreenState extends State<ChatScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
+              color: Colors.black.withValues( alpha:0.08),
               offset: const Offset(0, 4),
               blurRadius: 12,
             ),
@@ -328,7 +328,7 @@ class _ChatScreenState extends State<ChatScreen>
           borderRadius: BorderRadius.circular(25),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
+              color: Colors.black.withValues( alpha:0.08),
               offset: const Offset(0, 8),
               blurRadius: 24,
             ),
@@ -359,7 +359,7 @@ class _ChatScreenState extends State<ChatScreen>
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: chat['unread'] 
-                  ? const Color(0xFFF3B950).withOpacity(0.05)
+                  ? const Color(0xFFF3B950).withValues( alpha:0.05)
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(16),
             ),
@@ -375,13 +375,13 @@ class _ChatScreenState extends State<ChatScreen>
                         gradient: LinearGradient(
                           colors: [
                             _getAvatarColor(index),
-                            _getAvatarColor(index).withOpacity(0.7),
+                            _getAvatarColor(index).withValues( alpha:0.7),
                           ],
                         ),
                         borderRadius: BorderRadius.circular(25),
                         boxShadow: [
                           BoxShadow(
-                            color: _getAvatarColor(index).withOpacity(0.3),
+                            color: _getAvatarColor(index).withValues( alpha:0.3),
                             blurRadius: 8,
                             spreadRadius: 1,
                           ),
@@ -654,7 +654,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               width: 35,
               height: 35,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues( alpha:0.2),
                 borderRadius: BorderRadius.circular(17.5),
               ),
               child: Center(
@@ -823,7 +823,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues( alpha:0.1),
             offset: const Offset(0, -2),
             blurRadius: 10,
           ),

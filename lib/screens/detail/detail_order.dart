@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DetailOrder extends StatelessWidget {
-  const DetailOrder({Key? key}) : super(key: key);
+  const DetailOrder({super. key}) ;
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +129,7 @@ class DetailOrder extends StatelessWidget {
                               width: double.infinity,
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFF3B950).withOpacity(0.2),
+                                color: const Color(0xFFF3B950).withValues( alpha:0.2),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: const Text(

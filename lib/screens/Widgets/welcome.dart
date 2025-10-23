@@ -154,11 +154,11 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                       width: 6 + (index % 3) * 2,
                       height: 6 + (index % 3) * 2,
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2 + (index % 3) * 0.1),
+                        color: Colors.white.withValues(alpha:0.2 + (index % 3) * 0.1),
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.white.withOpacity(0.1),
+                            color: Colors.white.withValues(alpha:0.1),
                             blurRadius: 4,
                             spreadRadius: 1,
                           ),
@@ -195,7 +195,7 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                       blurRadius: 20,
                     ),
                     BoxShadow(
-                      color: const Color(0xFFF3B950).withOpacity(0.3),
+                      color: const Color(0xFFF3B950).withValues(alpha:0.3),
                       offset: const Offset(0, 8),
                       blurRadius: 40,
                     ),
@@ -212,7 +212,7 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                         height: 100,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.white.withOpacity(0.1),
+                          color: Colors.white.withValues(alpha:0.1),
                         ),
                       ),
                     ),
@@ -224,7 +224,7 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                         height: 60,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.white.withOpacity(0.05),
+                          color: Colors.white.withValues(alpha:0.05),
                         ),
                       ),
                     ),
@@ -251,7 +251,7 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: Colors.black.withValues(alpha:0.1),
                                 blurRadius: 20,
                                 spreadRadius: 5,
                                 offset: const Offset(0, 5),
@@ -289,7 +289,7 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                           shaderCallback: (bounds) => LinearGradient(
                             colors: [
                               Colors.white,
-                              Colors.white.withOpacity(0.8),
+                              Colors.white.withValues(alpha:0.8),
                               Colors.white,
                             ],
                             stops: const [0.0, 0.5, 1.0],
@@ -342,15 +342,15 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         margin: const EdgeInsets.symmetric(horizontal: 44),
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withValues(alpha:0.1),
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha:0.2),
                             width: 1,
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
+                              color: Colors.black.withValues(alpha:0.1),
                               blurRadius: 10,
                               spreadRadius: 2,
                             ),
@@ -381,7 +381,7 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                                 borderRadius: BorderRadius.circular(50),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color(0xFFF4B951).withOpacity(0.4),
+                                    color: const Color(0xFFF4B951).withValues(alpha:0.4),
                                     blurRadius: 20,
                                     spreadRadius: 2,
                                     offset: const Offset(0, 8),
@@ -406,8 +406,8 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                                     elevation: 8,
                                     shadowColor: const Color(0xFFF4B951).withValues(alpha: 0.5),
                                   ).copyWith(
-                                    overlayColor: MaterialStateProperty.all(
-                                      Colors.white.withOpacity(0.1),
+                                    overlayColor: WidgetStateProperty.all(
+                                      Colors.white.withValues(alpha:0.1),
                                     ),
                                   ),
                                   child: Row(
@@ -452,7 +452,7 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
                                 width: 8,
                                 height: 8,
                                 decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(
+                                  color: Colors.white.withValues(alpha:
                                     0.3 + ((_floatingAnimation.value + 10) / 20) * 0.4,
                                   ),
                                   shape: BoxShape.circle,

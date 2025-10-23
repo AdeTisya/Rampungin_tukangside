@@ -150,6 +150,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
     });
 
     if (emailController.text == userEmail && passwordController.text == userPass) {
+      if (!mounted) return;
       // Success animation
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -168,6 +169,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
       );
 
       await Future.delayed(const Duration(milliseconds: 500));
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
@@ -214,13 +216,13 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
         borderRadius: BorderRadius.circular(30),
         boxShadow: isFocused ? [
           BoxShadow(
-            color: const Color(0xFFF3B950).withOpacity(0.3),
+            color: const Color(0xFFF3B950).withValues(alpha:0.3),
             blurRadius: 10,
             spreadRadius: 2,
           ),
         ] : [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha:0.1),
             blurRadius: 5,
             spreadRadius: 1,
           ),
@@ -308,7 +310,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                       width: 4 + (index % 3),
                       height: 4 + (index % 3),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF3B950).withOpacity(0.2),
+                        color: const Color(0xFFF3B950).withValues(alpha:0.2),
                         shape: BoxShape.circle,
                       ),
                       transform: Matrix4.translationValues(
@@ -350,7 +352,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                             blurRadius: 20,
                           ),
                           BoxShadow(
-                            color: const Color(0xFFF3B950).withOpacity(0.3),
+                            color: const Color(0xFFF3B950).withValues(alpha:0.3),
                             offset: const Offset(0, 8),
                             blurRadius: 40,
                           ),
@@ -371,7 +373,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                       borderRadius: BorderRadius.circular(20),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black.withOpacity(0.2),
+                                          color: Colors.black.withValues(alpha:0.2),
                                           blurRadius: 15,
                                           spreadRadius: 3,
                                         ),
@@ -393,7 +395,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                             shaderCallback: (bounds) => LinearGradient(
                               colors: [
                                 Colors.white,
-                                Colors.white.withOpacity(0.9),
+                                Colors.white.withValues(alpha:0.9),
                               ],
                             ).createShader(bounds),
                             child: const Text(
@@ -526,7 +528,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: const Color(0xFFF4B951).withOpacity(0.4),
+                                          color: const Color(0xFFF4B951).withValues(alpha:0.4),
                                           blurRadius: 15,
                                           spreadRadius: 2,
                                           offset: const Offset(0, 6),
@@ -578,10 +580,10 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                       duration: const Duration(milliseconds: 300),
                                       padding: const EdgeInsets.all(12),
                                       decoration: BoxDecoration(
-                                        color: Colors.red.withOpacity(0.1),
+                                        color: Colors.red.withValues(alpha:0.1),
                                         borderRadius: BorderRadius.circular(10),
                                         border: Border.all(
-                                          color: Colors.red.withOpacity(0.3),
+                                          color: Colors.red.withValues(alpha:0.3),
                                         ),
                                       ),
                                       child: Row(
@@ -611,7 +613,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                       Expanded(
                                         child: Container(
                                           height: 1,
-                                          color: Colors.grey.withOpacity(0.3),
+                                          color: Colors.grey.withValues(alpha:0.3),
                                         ),
                                       ),
                                       const Padding(
@@ -627,7 +629,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                       Expanded(
                                         child: Container(
                                           height: 1,
-                                          color: Colors.grey.withOpacity(0.3),
+                                          color: Colors.grey.withValues(alpha:0.3),
                                         ),
                                       ),
                                     ],
@@ -642,7 +644,7 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                       borderRadius: BorderRadius.circular(50),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black.withOpacity(0.1),
+                                          color: Colors.black.withValues(alpha:0.1),
                                           blurRadius: 10,
                                           spreadRadius: 1,
                                           offset: const Offset(0, 4),
@@ -657,15 +659,15 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
                                         backgroundColor: Colors.white,
                                         padding: const EdgeInsets.symmetric(vertical: 16),
                                         side: BorderSide(
-                                          color: Colors.grey.withOpacity(0.3),
+                                          color: Colors.grey.withValues(alpha:0.3),
                                           width: 1.5,
                                         ),
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(50),
                                         ),
                                       ).copyWith(
-                                        overlayColor: MaterialStateProperty.all(
-                                          Colors.grey.withOpacity(0.1),
+                                        overlayColor: WidgetStateProperty.all(
+                                          Colors.grey.withValues(alpha:0.1),
                                         ),
                                       ),
                                       icon: Image.asset(

@@ -10,6 +10,7 @@ import 'screens/main_container.dart';
 import 'screens/detail/detail_order.dart';
 import 'screens/detail/profile.dart';
 import 'screens/detail/notification.dart';
+import 'screens/detail/setting.dart';
 
 
 void main() {
@@ -34,8 +35,9 @@ class MyApp extends StatelessWidget {
         '/bottom_navigation': (context) => const BottomNavigation(),
         '/main_container': (context) => const MainContainer(),
         '/detail_order': (context) => const DetailOrder(),
-        '/profile': (context) => const Profile(),
+        '/profile': (context) => Profile(),
         '/notification': (context) => const NotificationScreen(),
+        '/setting': (context) => Setting(),
       },
     );
   }

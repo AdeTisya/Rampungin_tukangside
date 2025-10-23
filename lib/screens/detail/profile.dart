@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:rampungin_id/screens/detail/setting.dart';
 
 class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+ Profile({super.key});
+
+  final logger = Logger();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +37,12 @@ class Profile extends StatelessWidget {
                         ),
                       ],
                     ),
-                    padding: EdgeInsets.fromLTRB(15, MediaQuery.of(context).padding.top + 20, 15, 100),
+                    padding: EdgeInsets.fromLTRB(
+                      15,
+                      MediaQuery.of(context).padding.top + 20,
+                      15,
+                      100,
+                    ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -161,28 +170,40 @@ class Profile extends StatelessWidget {
                               // Profile Information
                               _buildProfileItem('Nama Lengkap', 'John Doe'),
                               const SizedBox(height: 16),
-                              _buildProfileItem('Email', 'john.doe@example.com'),
+                              _buildProfileItem(
+                                'Email',
+                                'john.doe@example.com',
+                              ),
                               const SizedBox(height: 16),
-                              _buildProfileItem('No. Telepon', '+62 812 3456 7890'),
+                              _buildProfileItem(
+                                'No. Telepon',
+                                '+62 812 3456 7890',
+                              ),
                               const SizedBox(height: 16),
-                              _buildProfileItem('Alamat', 'Jl. Contoh No. 123, Jakarta'),
+                              _buildProfileItem(
+                                'Alamat',
+                                'Jl. Contoh No. 123, Jakarta',
+                              ),
                               const SizedBox(height: 16),
-                              _buildProfileItem('Tanggal Lahir', '01 Januari 1990'),
+                              
                               const SizedBox(height: 16),
                               _buildProfileItem('Jenis Kelamin', 'Laki-laki'),
                               const SizedBox(height: 20),
-                              
+
                               // Edit Profile Button
                               Center(
                                 child: ElevatedButton(
                                   onPressed: () {
                                     // Handle edit profile
-                                    print('Edit profile tapped');
+                                    logger.i('Edit profile tapped'); 
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xFFF3B950),
                                     foregroundColor: Colors.white,
-                                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 32,
+                                      vertical: 12,
+                                    ),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20),
                                     ),
@@ -209,8 +230,12 @@ class Profile extends StatelessWidget {
                     offset: const Offset(0, 10),
                     child: GestureDetector(
                       onTap: () {
-                        // Navigate to settings
-                        print('Settings tapped');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Setting(),
+                          ),
+                        );
                       },
                       child: Container(
                         margin: const EdgeInsets.only(top: 20, bottom: 30),
@@ -270,10 +295,10 @@ class Profile extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.5),
+            color: Colors.white.withValues(alpha:0.5),
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: const Color(0xFFF3B950).withOpacity(0.3),
+              color: const Color(0xFFF3B950).withValues(alpha:0.3),
               width: 1,
             ),
           ),

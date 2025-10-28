@@ -426,17 +426,7 @@ class _PaymentScreenState extends State<PaymentScreen>
             
             const SizedBox(height: 16),
             
-            // Bank Account Option
-            _buildPaymentOption(
-              title: 'Transfer Bank',
-              subtitle: 'BCA, BRI, BNI, Mandiri, dan lainnya',
-              icon: Icons.account_balance,
-              onTap: () {
-                _showBankDialog();
-              },
-            ),
             
-            const SizedBox(height: 24),
             
             // Info Card
             Container(
@@ -708,37 +698,37 @@ class _PaymentScreenState extends State<PaymentScreen>
     );
   }
 
-  void _showBankDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          title: const Text('Pilih Bank'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildBankOption('BCA', Icons.account_balance),
-              _buildBankOption('BRI', Icons.account_balance),
-              _buildBankOption('BNI', Icons.account_balance),
-              _buildBankOption('Mandiri', Icons.account_balance),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  // void _showBankDialog() {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.circular(20),
+  //         ),
+  //         title: const Text('Pilih Bank'),
+  //         content: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             _buildBankOption('BCA', Icons.account_balance),
+  //             _buildBankOption('BRI', Icons.account_balance),
+  //             _buildBankOption('BNI', Icons.account_balance),
+  //             _buildBankOption('Mandiri', Icons.account_balance),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  Widget _buildBankOption(String name, IconData icon) {
-    return ListTile(
-      leading: Icon(icon, color: const Color(0xFFF3B950)),
-      title: Text(name),
-      onTap: () {
-        Navigator.pop(context);
-        // Handle bank selection
-      },
-    );
-  }
+  // Widget _buildBankOption(String name, IconData icon) {
+  //   return ListTile(
+  //     leading: Icon(icon, color: const Color(0xFFF3B950)),
+  //     title: Text(name),
+  //     onTap: () {
+  //       Navigator.pop(context);
+  //       // Handle bank selection
+  //     },
+  //   );
+  // }
 }
